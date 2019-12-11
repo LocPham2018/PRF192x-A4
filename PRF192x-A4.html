@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dropdown form</title>
+    <style>
+      * {
+        font-family: Arial;
+      }
+      
+      table,
+      tr,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      
+      td {
+        padding: 2px 5px;
+        min-width: 100px;
+        text-align: center;
+      }
+      
+      tr:first-child {
+        background-color: rgb(224,224,224);
+      }
+      
+      #info {
+        display: inline-block;
+        width: 120px;
+      }
+      
+      span:not(#info),
+      .red {
+        color: red;
+      }
+      
+      .blue {
+        color: blue;
+      }
+      
+      .red,
+      .blue {
+        font-weight: bold;
+      }
+      
+      .hidden {
+        display: none;
+      }
+      
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <select>
+      <option>Chọn số lượng</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+    
+    
+    <form method="post" action="#">
+      <div id="1" class="hidden">
+        <hr>
+        <span id="info">Họ tên: </span><input type="text" name="name"><span id="namealert"></span><br><br>
+        <span id="info">Lớp: </span><input type="text" name="class"><span id="classalert"></span><br><br>
+        <span id="info">Email: </span><input type="email" name="email"><span id="mailalert"></span><br><br>
+        <span id="info">Số điện thoại: </span><input type="tel" name="phone"><span id="phonealert"></span><br><br>
+        <span id="info">Điểm Văn: </span><input type="text" name="lite"><span id="scorealert1"></span><br><br>
+        <span id="info">Điểm Đạo đức: </span><input type="text" name="moral"><span id="scorealert2"></span><br><br>
+        <span id="info">Điểm Lập trình: </span><input type="text" name="prog"><span id="scorealert3"></span><br><br>
+      </div>
+      <div id="2" class="hidden">
+        <hr>
+        <span id="info">Họ tên: </span><input type="text" name="name"><span id="namealert"></span><br><br>
+        <span id="info">Lớp: </span><input type="text" name="class"><span id="classalert"></span><br><br>
+        <span id="info">Email: </span><input type="email" name="email"><span id="mailalert"></span><br><br>
+        <span id="info">Số điện thoại: </span><input type="tel" name="phone"><span id="phonealert"></span><br><br>
+        <span id="info">Điểm Văn: </span><input type="text" name="lite"><span id="scorealert1"></span><br><br>
+        <span id="info">Điểm Đạo đức: </span><input type="text" name="moral"><span id="scorealert2"></span><br><br>
+        <span id="info">Điểm Lập trình: </span><input type="text" name="prog"><span id="scorealert3"></span><br><br>
+      </div>
+      <div id="3" class="hidden">
+        <hr>
+        <span id="info">Họ tên: </span><input type="text" name="name"><span id="namealert"></span><br><br>
+        <span id="info">Lớp: </span><input type="text" name="class"><span id="classalert"></span><br><br>
+        <span id="info">Email: </span><input type="email" name="email"><span id="mailalert"></span><br><br>
+        <span id="info">Số điện thoại: </span><input type="tel" name="phone"><span id="phonealert"></span><br><br>
+        <span id="info">Điểm Văn: </span><input type="text" name="lite"><span id="scorealert1"></span><br><br>
+        <span id="info">Điểm Đạo đức: </span><input type="text" name="moral"><span id="scorealert2"></span><br><br>
+        <span id="info">Điểm Lập trình: </span><input type="text" name="prog"><span id="scorealert3"></span><br><br>
+      </div>
+      <div id="4" class="hidden">
+        <hr>
+        <span id="info">Họ tên: </span><input type="text" name="name"><span id="namealert"></span><br><br>
+        <span id="info">Lớp: </span><input type="text" name="class"><span id="classalert"></span><br><br>
+        <span id="info">Email: </span><input type="email" name="email"><span id="mailalert"></span><br><br>
+        <span id="info">Số điện thoại: </span><input type="tel" name="phone"><span id="phonealert"></span><br><br>
+        <span id="info">Điểm Văn: </span><input type="text" name="lite"><span id="scorealert1"></span><br><br>
+        <span id="info">Điểm Đạo đức: </span><input type="text" name="moral"><span id="scorealert2"></span><br><br>
+        <span id="info">Điểm Lập trình: </span><input type="text" name="prog"><span id="scorealert3"></span><br><br>
+      </div>
+      <span id="info"></span><button type="button" class="hidden">Nhập</button>
+    </form>
+    <hr>
+    
+    <table>
+      <tr>
+        <td>STT</td>
+        <td>Họ Tên</td>
+        <td>Lớp</td>
+        <td>Email</td>
+        <td>SĐT</td>
+        <td>Văn</td>
+        <td>Đạo đức</td>
+        <td>Lập trình</td>
+        <td>Trung bình</td>
+      </tr>
+    </table>
+    <div style="float:right;">
+      <button id="eval">Đánh giá HS</button>
+      <button id="avg">Tính TB</button>
+    </div>
+    
+    <script>
+      var n, myJSON;
+      $('select').on('change', function() {
+        n = $('select option:checked').val();
+        for (var i = 1; i <= 4; i++) {
+          if (i <= n) {
+            $('form #' + i).removeClass('hidden');
+          } else {
+            $('form #' + i).addClass('hidden');
+          }
+        }
+        $('form button').removeClass('hidden');
+      });
+      
+      
+      var data = [];
+      
+      function validName(x) {
+        var name = $('#' + x + ' [name="name"]').val();
+        $('#' + x + ' #namealert').empty();
+        if(name === '') {
+          $('#' + x + ' #namealert').append('Họ tên bắt buộc nhập.');
+          return false;
+        } else {
+          return true;
+        }
+      }
+      
+      function validClass(x) {
+        var grade = $('#' + x + ' [name="class"]').val();
+        $('#' + x + ' #classalert').empty();
+        if(grade === '') {
+          $('#' + x + ' #classalert').append('Lớp bắt buộc nhập.');
+          return false;
+        } else {
+          return true;
+        }
+      }
+      
+      function validEmail(x) {
+        var mail = $('#' + x + ' [name="email"]').val();
+        var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        $('#' + x + ' #mailalert').empty();
+        if(!re.test(mail)) {
+          $('#' + x + ' #mailalert').append('Email phải nhập và nhập đúng định dạng.');
+          return false;
+        } else {
+          return true;
+        }
+      }
+      
+      function validPhone(x) {
+        var phone = $('#' + x + ' [name="phone"]').val();
+        var re = /^[0-9-+]+$/;
+        $('#' + x + ' #phonealert').empty();
+        if(!re.test(phone)) {
+          $('#' + x + ' #phonealert').append('Số điện thoại phải nhập và nhập đúng định dạng.');
+          return false;
+        } else {
+          return true;
+        }
+      }
+      
+      function validLiterature(x) {
+        var score1 = $('#' + x + ' [name="lite"]').val();
+        $('#' + x + ' #scorealert1').empty();
+        if(score1 == '' || isNaN(score1) || score1 < 0 || score1 > 10) {
+          $('#' + x + ' #scorealert1').append('Điểm Văn phải nhập và phải là số từ 0 - 10.');
+          return false;
+        } else {
+          return true;
+        }
+      }
+      
+      function validMoral(x) {
+        var score2 = $('#' + x + ' [name="moral"]').val();
+        $('#' + x + ' #scorealert2').empty();
+        if(score2 == '' || isNaN(score2) || score2 < 0 || score2 > 10) {
+          $('#' + x + ' #scorealert2').append('Điểm Đạo Đức phải nhập và phải là số từ 0 - 10.');
+          return false;
+        } else {
+          return true;
+        }
+      }
+      
+      function validProgramming(x) {
+        var score3 = $('#' + x + ' [name="prog"]').val();
+        $('#' + x + ' #scorealert3').empty();
+        if(score3 == '' || isNaN(score3) || score3 < 0 || score3 > 10) {
+          $('#' + x + ' #scorealert3').append('Điểm Lập trình phải nhập và phải là số từ 0 - 10.');
+          return false;
+        } else {
+          return true;
+        }
+      }
+      
+      $('form button').click(function(event) {
+        var check = true;
+        for (i = 1; i <= n; i++) {
+          check = check & validName(i) & validClass(i) & validEmail(i) & validPhone(i) & validLiterature(i) & validMoral(i) & validProgramming(i);
+          console.log(check);
+        }
+        if(!check) {
+          return false;
+        } else {
+          event.preventDefault();
+          for (i = 1; i <= n; i++) {
+            var obj = {};
+            obj.name = $('#' + i + ' [name="name"]').val();
+            obj.grade = $('#' + i + ' [name="class"]').val();
+            obj.email = $('#' + i + ' [name="email"]').val();
+            obj.phone = $('#' + i + ' [name="phone"]').val();
+            obj.score = [];
+            obj.score[0] = Number($('#' + i + ' [name="lite"]').val());
+            obj.score[1] = Number($('#' + i + ' [name="moral"]').val());
+            obj.score[2] = Number($('#' + i + ' [name="prog"]').val());
+            obj.score[3] = (obj.score[0] + obj.score[1] + obj.score[2])/3;
+            data.push(obj);
+            var row = '<tr><td>' + $('tr').length + '</td><td>' + obj.name + '</td><td>' + obj.grade + '</td><td>' +
+                      obj.email + '</td><td>' + obj.phone + '</td><td>' + obj.score[0] + '</td><td>' + obj.score[1] +
+                      '</td><td>' + obj.score[2] + '</td><td>?</td></tr>';
+            $('table').append(row);
+            $('#' + i + ' input').val('');
+          }
+          myJSON = JSON.stringify(data);
+          console.log(myJSON);
+          return true;
+        }
+      });
+      
+      $('button#avg').click(function() {
+        var i = 1;
+        $('tr').each(function() {
+          var cell = 'tr:eq(' + i + ') td:last-child';
+          $(cell).empty();
+          $(cell).append(data[i-1].score[3].toFixed(1));
+          i++;
+        });
+      });
+      
+      $('button#eval').click(function toggleGood() {
+        var i = 0;
+        $('tr').each(function() {
+          for (var j = 0; j <= 3; j++) {
+            var cell = $('tr:eq(' + (i + 1) + ') td:nth-child(' + (j + 6) +')');
+            if(data[i].score[j] >= 8) {
+              cell.addClass('red');
+            } else if(data[i].score[j] < 5) {
+              cell.addClass('blue');
+            }
+          }
+          i++;
+        });
+      });
+    </script>
+  </body>
+</html>
